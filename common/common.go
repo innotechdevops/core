@@ -226,26 +226,6 @@ func ParseFloat32Safety(num string) float32 {
 	return float32(vf)
 }
 
-func Contains(path string, contain ...string) bool {
-	found := 0
-	for _, c := range contain {
-		if strings.Contains(path, c) {
-			found++
-		}
-	}
-	return found > 0
-}
-
-func Match(find string, source ...string) bool {
-	found := 0
-	for _, c := range source {
-		if find == c {
-			found++
-		}
-	}
-	return found > 0
-}
-
 func IsExpired(jwt string, key string) bool {
 	token := strings.Split(jwt, ".")
 	payload, err := base64.StdEncoding.WithPadding(base64.NoPadding).DecodeString(token[1])
