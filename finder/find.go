@@ -24,3 +24,7 @@ func Contain[T any](list []T, value T, fn func(a, b T) bool) bool {
 func Match(maps map[string]bool, value string) bool {
 	return maps[strings.ToLower(value)]
 }
+
+func MatchString(maps map[string]string, value string) string {
+	return maps[value]
+}
