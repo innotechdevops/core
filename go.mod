@@ -12,5 +12,6 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/innotechdevops/timex v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	golang.org/x/crypto v0.20.0 // indirect
 )
