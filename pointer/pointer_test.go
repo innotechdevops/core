@@ -1,9 +1,10 @@
 package pointer_test
 
 import (
-	"github.com/innotechdevops/core/pointer"
 	"reflect"
 	"testing"
+
+	"github.com/innotechdevops/core/pointer"
 )
 
 func TestNew(t *testing.T) {
