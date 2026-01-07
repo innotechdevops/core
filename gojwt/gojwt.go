@@ -1,12 +1,14 @@
 package gojwt
 
 import (
+	"encoding/base64"
+	"strings"
+	"time"
+
 	"github.com/goccy/go-json"
 	"github.com/golang-jwt/jwt"
 	"github.com/innotechdevops/timex"
 	"github.com/pkg/errors"
-	"strings"
-	"time"
 )
 
 const TypeBearer = "Bearer"
@@ -101,4 +103,25 @@ func Generate(claims jwt.MapClaims, secret string) string {
 		return ""
 	}
 	return tokenStr
+}
+
+func IsExpired(jwt string, key string) bool {
+	token := strings.Split(jwt, ".")
+	payload, err := base64.StdEncoding.WithPadding(base64.NoPadding).DecodeString(token[1])
+	if err != nil {
+		return true
+	}
+
+	m := map[string]interface{}{}
+	if err := json.Unmarshal(payload, &m); err != nil {
+		return true
+	}
+
+	if timestamp, ok := m[key].(float64); ok {
+		current := timex.Now().Unix()
+		if current < int64(timestamp) {
+			return false
+		}
+	}
+	return true
 }
