@@ -50,3 +50,16 @@ func TestNormalizeText(t *testing.T) {
 		t.Errorf("Expected 'Hello, World! This is a test.', got '%s'", normalized)
 	}
 }
+
+func TestJoinInt64(t *testing.T) {
+	// Given
+	list := []int64{1, 2, 3, 4, 5, 6}
+
+	// When
+	actual := stringx.Join(list, ",")
+
+	// Then
+	if actual != "1,2,3,4,5,6" {
+		t.Error("Error:", actual)
+	}
+}

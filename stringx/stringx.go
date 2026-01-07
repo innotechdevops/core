@@ -219,3 +219,15 @@ func QueryUnescape(encoded string) string {
 	decoded, _ := url.QueryUnescape(encoded)
 	return decoded
 }
+
+func Join[T any](source []T, sep string) string {
+	output := ""
+	for i, v := range source {
+		str := fmt.Sprint(v)
+		if i > 0 {
+			output += sep
+		}
+		output += str
+	}
+	return output
+}
