@@ -1,8 +1,10 @@
 package mapping
 
 import (
-	"github.com/goccy/go-json"
+	"fmt"
 	"reflect"
+
+	"github.com/goccy/go-json"
 )
 
 /*
@@ -87,4 +89,37 @@ func TinyInto[D any](src any, dst *D) error {
 		return err
 	}
 	return json.Unmarshal(b, dst)
+}
+
+// KeyValue Define the KeyValue interface
+type KeyValue[K comparable, V any] interface {
+	Key() K
+	Value() V
+}
+
+// ToMap converts a slice of KeyValue into a map.
+func ToMap[K comparable, V any, T KeyValue[K, V]](data []T) map[K]V {
+	m := make(map[K]V)
+	for _, v := range data {
+		m[v.Key()] = v.Value()
+	}
+	return m
+}
+
+func ToList[S any, T any](data []S, onSelect func(value S) T) []T {
+	result := make([]T, len(data))
+	for _, v := range data {
+		result = append(result, onSelect(v))
+	}
+	return result
+}
+
+func ToAsOfDate(year *[]int, month *[]string) []string {
+	asOfDate := []string{}
+	for _, y := range *year {
+		for _, m := range *month {
+			asOfDate = append(asOfDate, fmt.Sprintf("%d-%s-01", y, m))
+		}
+	}
+	return asOfDate
 }
