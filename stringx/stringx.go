@@ -139,14 +139,6 @@ func IsNotNull[T any](value *T) bool {
 	return true
 }
 
-func IsEmptyList[T any](value *[]T) bool {
-	return value == nil || len(*value) == 0
-}
-
-func IsNotEmptyList[T any](value *[]T) bool {
-	return !IsEmptyList(value)
-}
-
 func GetStackTrace(e interface{}) string {
 	buf := make([]byte, 1<<20)
 	buf = buf[:runtime.Stack(buf, false)]
