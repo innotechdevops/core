@@ -17,6 +17,18 @@ func Last[T any](list []T) *T {
 	return &list[size-1]
 }
 
+// How to use:
+// func (Record) ToStruct() Record {}
+// newRecords := collectionx.Map(records, Record.ToStruct)
+func Map[T any, R any](src []T, fn func(T) R) []R {
+	result := make([]R, 0, len(src))
+	size := len(src)
+	for i := 0; i < size; i++ {
+		result = append(result, fn(src[i]))
+	}
+	return result
+}
+
 // MapToSlice
 // How to use:
 // slices := MapToSlice(map[string]*int{"key1": pointer.Int(1), "key2": pointer.Int(2)})
