@@ -2,6 +2,7 @@ package redisx
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 )
@@ -54,6 +55,26 @@ func (s *Repository[T]) Create(ctx context.Context, obj *T) error {
 		obj,
 		s.ttl,
 	)
+}
+
+func (s *Repository[T]) CreateList(ctx context.Context, obj *[]T) error {
+	if obj == nil {
+		return errors.New("object is null")
+	}
+
+	var errs []error
+
+	for i := range *obj {
+		if err := s.Create(ctx, &(*obj)[i]); err != nil {
+			errs = append(errs, err)
+		}
+	}
+
+	if len(errs) > 0 {
+		return errors.Join(errs...)
+	}
+
+	return nil
 }
 
 func (s *Repository[T]) Update(ctx context.Context, obj *T) error {
