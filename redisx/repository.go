@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"time"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type Repository[T any] struct {
@@ -102,4 +104,12 @@ func (s *Repository[T]) FindList(ctx context.Context) ([]T, error) {
 	var result []T
 	err := s.ds.GetAll(ctx, s.indexKey(), &result)
 	return result, err
+}
+
+func (s *Repository[T]) Publish(ctx context.Context, channel string, message any) error {
+	return s.ds.Publish(ctx, channel, message)
+}
+
+func (s *Repository[T]) Subscribe(ctx context.Context, channels ...string) *redis.PubSub {
+	return s.ds.Subscribe(ctx, channels...)
 }

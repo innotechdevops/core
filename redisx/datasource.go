@@ -34,6 +34,10 @@ type DataSource interface {
 
 	// Bulk read
 	GetAll(ctx context.Context, indexKey string, destSlice any) error
+
+	// Pub/Sub
+	Publish(ctx context.Context, channel string, message any) error
+	Subscribe(ctx context.Context, channels ...string) *redis.PubSub
 }
 
 type DataSourceBuilder interface {
@@ -134,6 +138,14 @@ func (r *dataSource) Get(ctx context.Context, key string, dest any) error {
 		return err // includes redis.Nil when not found
 	}
 	return json.Unmarshal(b, dest)
+}
+
+func (r *dataSource) Publish(ctx context.Context, channel string, message any) error {
+	return r.RDb.Publish(ctx, channel, message).Err()
+}
+
+func (r *dataSource) Subscribe(ctx context.Context, channels ...string) *redis.PubSub {
+	return r.RDb.Subscribe(ctx, channels...)
 }
 
 ////////////////////////////////////////////////////////////
