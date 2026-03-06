@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-redis/cache/v9"
+	"github.com/goccy/go-json"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -34,6 +35,8 @@ func NewCache(client redis.UniversalClient) Cache {
 	c := cache.New(&cache.Options{
 		Redis:      client,
 		LocalCache: cache.NewTinyLFU(1000, time.Minute),
+		Marshal:    json.Marshal,
+		Unmarshal:  json.Unmarshal,
 	})
 	return &cacheX{currentCache: c, client: client}
 }
