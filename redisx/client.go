@@ -34,6 +34,7 @@ type RedisOptions struct {
 	ClusterMode bool
 	Addr        string
 	DB          int
+	Username    string
 	Password    string
 	TraceEnable bool
 }
@@ -76,6 +77,9 @@ func newClient(options *RedisOptions) redis.UniversalClient {
 		MaxRetries: 3,
 	}
 
+	if options.Username != "" {
+		redisOptions.Username = options.Username
+	}
 	if options.Password != "" {
 		redisOptions.Password = options.Password
 	}
@@ -88,6 +92,9 @@ func newClusterClient(options *RedisOptions) redis.UniversalClient {
 		Addrs: strings.Split(options.Addr, ","),
 	}
 
+	if options.Username != "" {
+		redisOptions.Username = options.Username
+	}
 	if options.Password != "" {
 		redisOptions.Password = options.Password
 	}
