@@ -3,29 +3,29 @@ module github.com/innotechdevops/core
 go 1.24.0
 
 require (
+	github.com/alitto/pond v1.9.2
+	github.com/go-redis/cache/v9 v9.0.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/pkg/errors v0.9.1
+	github.com/prongbang/csvx v1.2.0
+	github.com/redis/go-redis/extra/redisotel/v9 v9.18.0
+	github.com/redis/go-redis/v9 v9.18.0
 	golang.org/x/text v0.22.0
 )
 
 require (
-	github.com/alitto/pond v1.9.2 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/go-redis/cache/v9 v9.0.0 // indirect
 	github.com/klauspost/compress v1.17.9 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
-	github.com/prongbang/callx v1.3.5 // indirect
-	github.com/prongbang/csvx v1.2.0 // indirect
 	github.com/redis/go-redis/extra/rediscmd/v9 v9.18.0 // indirect
-	github.com/redis/go-redis/extra/redisotel/v9 v9.18.0 // indirect
-	github.com/redis/go-redis/v9 v9.18.0 // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.3 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
